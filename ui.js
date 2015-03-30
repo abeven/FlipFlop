@@ -1,12 +1,19 @@
+//source: http://stackoverflow.com/a/25552273/139046
 ko.bindingHandlers.bootstrapSwitchOn = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
         $elem = $(element);
         $elem.bootstrapSwitch();
-        $elem.bootstrapSwitch('state', ko.utils.unwrapObservable(valueAccessor().state())); // Set intial state
-        $elem.on('switchChange.bootstrapSwitch', function (e, data) {
-            var context = ko.contextFor(this);
-            context.$root[valueAccessor().fnctn](context.$data);
+        $elem.bootstrapSwitch('state', ko.utils.unwrapObservable(valueAccessor())); // Set intial state
+        $elem.on('switchChange.bootstrapSwitch', function (event, state) {
+            valueAccessor()(state);
         });
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var vStatus = $(element).bootstrapSwitch('state');
+        var vmStatus = ko.utils.unwrapObservable(valueAccessor());
+        if (vStatus != vmStatus) {
+            $(element).bootstrapSwitch('state', vmStatus);
+        }
     }
 };
 
