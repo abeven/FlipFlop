@@ -1,4 +1,5 @@
 using System;
+using Host.Switches;
 using Nancy;
 using Nancy.ModelBinding;
 
@@ -17,14 +18,19 @@ namespace Host.Web
         {
             Get[@"/"] = parameters => Response.AsFile("Content/index.html", "text/html");
 
-            Get["/features"] = parameters => Response.AsJson(Program.State);
+            Get["/features"] = parameters => Response.AsJson(Program.SwitchRegistry.All());
 
             Post["/features"] = p =>
             {
                 FeatureResource featureResource = this.Bind();
                 featureResource.Id = Guid.NewGuid().ToString();
 
-                Program.State.Add(featureResource);
+                Program.cls.Send(new AddSwithCommand()
+                {
+                    Id = featureResource.Id,
+                    Name = featureResource.Name, 
+                    State = featureResource.On
+                });
 
                 return Response.AsJson(featureResource);
             };
@@ -33,8 +39,8 @@ namespace Host.Web
             {
                 FeatureResource patch = this.Bind();
 
-                var ft = Program.State.Find(x => x.Id == _.id);
-                ft.On = patch.On;
+                Program.cls.Send(new FlipSwitchCommand() { Id = patch.Id });
+
 
                 return Response.AsJson(HttpStatusCode.OK);
             };

@@ -1,33 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using Host.Switches;
 using Host.Web;
 using Nancy.Hosting.Self;
+using NanoCluster;
 
 namespace Host
 {
     class Program
     {
-        public static List<FeatureResource> State = new List<FeatureResource>() {
-            new FeatureResource() {Id = "1", Name = "Allow users in", On = false},
-            new FeatureResource() {Id = "2", Name = "Show promo", On = true},
-            new FeatureResource() {Id = "3", Name = "Offer discounts", On = false},
-            new FeatureResource() {Id = "4", Name = "Bypass authentication", On = false},
-        };
+        public static DistributedSwitchRegistry SwitchRegistry = new DistributedSwitchRegistry();
+        public static NanoClusterEngine cls;
 
         static void Main(string[] args)
         {
-            var nancyHost = new NancyHost(
-                new Uri("http://localhost:8081/"),
-                new NancyBootstrap(),
-                new HostConfiguration() { AllowChunkedEncoding = false }
-                );
+            var nancyHost = new NancyHost(new Uri("http://localhost:8081/"),new NancyBootstrap(),new HostConfiguration() { AllowChunkedEncoding = false });
             nancyHost.Start();
 
-            Console.ReadKey();
+            using (cls = new NanoClusterEngine(cfg =>
+            {
+                cfg.DiscoverByClusterKey("FlipFlop");
+                cfg.DistributedTransactions = SwitchRegistry;
+            }))
+            {
+                Console.WriteLine("Cluster stable " + cls.IsLeadingProcess);
+
+                cls.Send(new AddSwithCommand()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Show users", 
+                    State = true
+                });
+
+                Console.ReadKey();
+            }
 
             nancyHost.Stop();
         }
     }
-
-    
 }
