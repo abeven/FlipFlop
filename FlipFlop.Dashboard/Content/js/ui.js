@@ -20,7 +20,7 @@ ko.bindingHandlers.bootstrapSwitchOn = {
 
 function Feature(data) {
     this.name = ko.observable(data.name);
-    this.on = ko.observable(data.on);
+    this.enabled = ko.observable(data.enabled);
     this.id = ko.observable(data.id);
 }
 
@@ -39,7 +39,7 @@ function FeaturesViewModel() {
         var name = t.newFeatureName();
         if ((name != "") && (t.features.indexOf(name) < 0)) {
 
-            var feature = new Feature({ name: name , on: false});
+            var feature = new Feature({ name: name, enabled: false });
 
             t.features.push(feature);
 

@@ -5,7 +5,7 @@ using Nancy.Conventions;
 using Nancy.Json;
 using Nancy.TinyIoc;
 
-namespace Host.Web
+namespace FlipFlop.Dashboard.Web
 {
     public class NancyBootstrap : DefaultNancyBootstrapper
     {

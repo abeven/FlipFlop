@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using Host.Switches;
-using Host.Web;
+using FlipFlop;
+using FlipFlop.Dashboard.Web;
 using Nancy.Hosting.Self;
 using NanoCluster;
 
-namespace Host
+namespace FlipFlop.Dashboard
 {
     class Program
     {
-        public static DistributedSwitchRegistry SwitchRegistry = new DistributedSwitchRegistry();
+        public static DistributedFeaturesRegistry FeaturesRegistry = new DistributedFeaturesRegistry();
         public static NanoClusterEngine cls;
 
         static void Main(string[] args)
@@ -20,16 +19,16 @@ namespace Host
             using (cls = new NanoClusterEngine(cfg =>
             {
                 cfg.DiscoverByClusterKey("FlipFlop");
-                cfg.DistributedTransactions = SwitchRegistry;
+                cfg.DistributedTransactions = FeaturesRegistry;
             }))
             {
                 Console.WriteLine("Cluster stable " + cls.IsLeadingProcess);
 
-                cls.Send(new AddSwithCommand()
+                cls.Send(new AddFeatureCommand()
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = "Show users", 
-                    State = true
+                    Enabled = true
                 });
 
                 Console.ReadKey();
