@@ -111,11 +111,9 @@ ol.linenums {
   }
 .demo-logo .logo {
   width: 236px;
-  height: 181px;
   margin: 0 auto 26px;
   overflow: hidden;
   text-indent: -9999em;
-  background: url(../img/demo/logo-mask.png) center 0 no-repeat;
   background-size: 236px 181px;
   }
 .demo-logo small {
@@ -355,3 +353,17 @@ ol.linenums {
   width: 140px;
   margin-left: 20px;
   }
+
+.features{
+	padding: 10px;
+}  
+ 
+ .features-list li {
+	padding: 10px;
+ }
+ 
+ .features-list input {
+	padding-left: 10px;
+ }
+ 
+ 
