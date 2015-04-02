@@ -33,19 +33,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nancy">
-      <HintPath>packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
+      <HintPath>..\packages\Nancy.1.1\lib\net40\Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Hosting.Self">
-      <HintPath>packages\Nancy.Hosting.Self.1.1\lib\net40\Nancy.Hosting.Self.dll</HintPath>
+      <HintPath>..\packages\Nancy.Hosting.Self.1.1\lib\net40\Nancy.Hosting.Self.dll</HintPath>
     </Reference>
     <Reference Include="NanoCluster">
-      <HintPath>packages\NanoCluster.0.1.0.2\lib\net45\NanoCluster.dll</HintPath>
+      <HintPath>..\packages\NanoCluster.0.1.0.2\lib\net45\NanoCluster.dll</HintPath>
     </Reference>
     <Reference Include="NetMQ">
-      <HintPath>packages\NetMQ.3.3.0.11\lib\net40\NetMQ.dll</HintPath>
+      <HintPath>..\packages\NetMQ.3.3.0.11\lib\net40\NetMQ.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

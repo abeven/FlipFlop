@@ -31,13 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NanoCluster">
-      <HintPath>..\Host\packages\NanoCluster.0.1.0.2\lib\net45\NanoCluster.dll</HintPath>
+      <HintPath>..\packages\NanoCluster.0.1.0.2\lib\net45\NanoCluster.dll</HintPath>
     </Reference>
     <Reference Include="NetMQ">
-      <HintPath>..\Host\packages\NetMQ.3.3.0.11\lib\net40\NetMQ.dll</HintPath>
+      <HintPath>..\packages\NetMQ.3.3.0.11\lib\net40\NetMQ.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\Host\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,6 +57,8 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
